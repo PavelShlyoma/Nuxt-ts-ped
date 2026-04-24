@@ -1,0 +1,7 @@
+@import "_fonts.css";
+
+body {
+    background-color: rgba(49, 27, 146, 1);
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
