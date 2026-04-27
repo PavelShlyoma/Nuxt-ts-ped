@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+const {isOpenLogin, toggleLoginOpen, isOpenReg, toggleRegOpen} = usePopupController()
+
 </script>
 
 <template>
@@ -8,21 +10,35 @@
       <img class="nav-main-icon" src="~/../public/icons/header-logo.png" alt="1">
     </NuxtLink>
     <div class="nav-container">
-      <nav class="nav--go">Watch</nav>
+      <NuxtLink to="/watch" class="nav--go">Watch</NuxtLink>
       <div class="nav--separator"></div>
-      <nav class="nav--go">Learning</nav>
+      <NuxtLink to="/learning" class="nav--go">Learning</NuxtLink>
       <div class="nav--separator"></div>
-      <nav class="nav--go">Shop</nav>
+      <NuxtLink to="/shop" class="nav--go">Shop</NuxtLink>
       <div class="nav--separator"></div>
-      <nav class="nav--go">Job</nav>
+      <NuxtLink to="/job" class="nav--go">Job</NuxtLink>
       <div class="nav--separator"></div>
-      <nav class="nav--go">Hire</nav>
+      <NuxtLink to="/hire" class="nav--go">Hire</NuxtLink>
     </div>
     <div class="nav-button-container">
-      <button class="nav-button--go">LOGIN</button>
-      <button class="nav-button--go">REGISTER</button>
+      <button @click="toggleLoginOpen" class="nav-button--go">
+        SIGN IN
+      </button>
+      <button @click="toggleRegOpen" class="nav-button--go">
+        SIGN UP
+      </button>
       <font-awesome class="cog--custom" icon="fa fa-cog"></font-awesome>
     </div>
+    <teleport to="body">
+      <transition name="slide-fade">
+        <AuthLogin v-if="isOpenLogin">
+        </AuthLogin>
+      </transition>
+      <transition name="slide-fade">
+        <AuthRegister v-if="isOpenReg">
+        </AuthRegister>
+      </transition>
+    </teleport>
   </header>
 </template>
 
@@ -36,6 +52,7 @@ header {
   max-width: 90%;
   justify-content: space-between;
 }
+
 
 .nav-main {
   display: flex;
@@ -84,6 +101,7 @@ header {
   font-weight: 400;
   padding: 0 10px 0;
   transition: ease-in-out .1s;
+  text-decoration: none;
 }
 
 .nav--go:hover {
@@ -143,7 +161,7 @@ header {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 250px;
+  max-width: 255px;
 }
 
 .nav-button--go {
@@ -155,12 +173,26 @@ header {
   border: none;
   color: #fff;
   transition: ease-in-out .1s;
+  text-decoration: none;
 }
 
 .nav-button--go:hover {
   color: #651FFF;
   background-color: #D1C4E9;
   border-radius: 40px;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  opacity: 0;
 }
 
 </style>
