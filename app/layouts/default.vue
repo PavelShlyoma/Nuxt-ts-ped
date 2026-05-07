@@ -1,13 +1,15 @@
 <script setup lang="ts">
 
+const {closePopup} = usePopupController()
+
 </script>
 
 <template>
-  <div class="bg-layout">
-    <Header></Header>
-    <Transition name="slide-fade">
-      <slot></slot>
-    </Transition>
+  <div @keyup.esc="closePopup" class="bg-layout">
+    <header v-scroll>
+      <Header></Header>
+    </header>
+    <slot></slot>
   </div>
 </template>
 
@@ -19,18 +21,22 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  .slide-fade-enter-active {
-    transition: all 0.3s ease-out;
+  header {
+    padding: 10px 0 0;
+    transition: all 0.4s ease;
+    align-items: center;
   }
 
-  .slide-fade-leave-active {
-    transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
-  }
-
-  .slide-fade-enter-from,
-  .slide-fade-leave-to {
-    transform: translateX(20px);
-    opacity: 0;
+  .el-scroll {
+    padding: 10px 0;
+    top: 0;
+    position: sticky;
+    width: 100%;
+    transition: all 0.4s ease;
+    background: RGBA(49, 27, 146, 0.4);
+    background: linear-gradient(180deg,rgba(49, 27, 146, 0.6) 0%, rgba(48, 11, 214, 0.2) 100%);
+    backdrop-filter: blur(7px);
+    border-radius: 0 0 50px 50px;
   }
 
 </style>

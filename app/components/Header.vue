@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-const {isOpenLogin, toggleLoginOpen, isOpenReg, toggleRegOpen} = usePopupController()
+const {isOpenLogin, toggleLoginOpen, isOpenReg, toggleRegOpen, isMenuOpen, toggleMenu} = usePopupController()
 
 </script>
 
 <template>
-  <header>
+  <div  class="nav-header">
     <NuxtLink to="/" class="nav-main">
       <img class="nav-main-icon" src="~/../public/icons/header-logo.png" alt="1">
     </NuxtLink>
@@ -22,12 +22,16 @@ const {isOpenLogin, toggleLoginOpen, isOpenReg, toggleRegOpen} = usePopupControl
     </div>
     <div class="nav-button-container">
       <button @click="toggleLoginOpen" class="nav-button--go">
-        SIGN IN
+        Sign in
       </button>
       <button @click="toggleRegOpen" class="nav-button--go">
-        SIGN UP
+        Sign up
       </button>
-      <font-awesome class="cog--custom" icon="fa fa-cog"></font-awesome>
+      <font-awesome @click="console.log()" class="cog--custom" icon="fa fa-cog"></font-awesome>
+      <button @click="toggleMenu" class="nav-button-gamb-container">
+        <div class="nav-button-gamb">
+        </div>
+      </button>
     </div>
     <teleport to="body">
       <transition name="slide-fade">
@@ -39,20 +43,24 @@ const {isOpenLogin, toggleLoginOpen, isOpenReg, toggleRegOpen} = usePopupControl
         </AuthRegister>
       </transition>
     </teleport>
-  </header>
+    <teleport to="body">
+      <transition name="slide-fade">
+        <MobileMenu class="menu-pos" v-if="isMenuOpen">
+        </MobileMenu>
+      </transition>
+    </teleport>
+  </div>
 </template>
 
 <style scoped>
 
-header {
+.nav-header {
   display: flex;
   align-items: center;
   margin: 0 auto;
-  padding: 30px 0 0;
-  max-width: 90%;
+  width: 80%;
   justify-content: space-between;
 }
-
 
 .nav-main {
   display: flex;
@@ -60,6 +68,8 @@ header {
 }
 
 .nav-main-icon {
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   transition: transform 4s linear;
   transform: rotate(0deg);
@@ -77,14 +87,15 @@ header {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 630px;
+  padding-left: 40px;
+  max-width: calc(350px + 10%);
 }
 
 .cog--custom {
   cursor: pointer;
   color: #D1C4E9;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   margin: 0 15px 0;
   transition: ease-in-out .1s;
 }
@@ -97,7 +108,7 @@ header {
 .nav--go {
   cursor: pointer;
   color: #FFFFFF;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 400;
   padding: 0 10px 0;
   transition: ease-in-out .1s;
@@ -161,12 +172,12 @@ header {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 255px;
+  max-width: 220px;
 }
 
 .nav-button--go {
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   padding: 10px 15px;
   background: none;
@@ -193,6 +204,63 @@ header {
 .slide-fade-enter-from,
 .slide-fade-leave-to {
   opacity: 0;
+}
+
+.nav-button-gamb-container {
+  display: none;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+.nav-button-gamb {
+  width: 15px;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.nav-button-gamb::before, .nav-button-gamb::after {
+  content: '';
+  background-color: white;
+  height: 2px;
+  border-radius: 2px;
+  position: absolute;
+}
+
+.nav-button-gamb:hover, .nav-button-gamb:hover::before, .nav-button-gamb:hover::after {
+  background-color: #D1C4E9;
+}
+
+.nav-button-gamb::before {
+  width: 15px;
+  top: 4px;
+  right: -4px;
+}
+
+.nav-button-gamb::after {
+  width: 15px;
+  bottom: 4px;
+  left: -6px;
+}
+
+.menu-pos {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    display: none;
+  }
+
+  .nav-button-container {
+    max-width: 230px;
+  }
+
+  .nav-button-gamb-container {
+    display: flex;
+    align-items: center;
+  }
 }
 
 </style>

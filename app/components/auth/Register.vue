@@ -42,23 +42,13 @@ const {toggleRegOpen, toggleSwitch} = usePopupController()
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  z-index: 10;
 }
 
 .log-container {

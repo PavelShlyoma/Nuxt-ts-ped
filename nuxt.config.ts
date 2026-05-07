@@ -2,11 +2,20 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
-  modules: ['@vesp/nuxt-fontawesome'],
+  modules: ['@vesp/nuxt-fontawesome', 'nuxt-aos', '@pinia/nuxt', 'nuxt-swiper'],
     fontawesome: {
         icons: {
-            solid: ['cog', 'close'],
+            solid: ['cog', 'close', 'chevron-left', 'chevron-right'],
         }
     },
-    ssr: true
+    runtimeConfig: {
+      public: {
+          NUXT_PUBLIC_USE_MOCKS: true,
+          BASE_URL: 'http://localhost:3000/mock',
+      }
+    },
+    ssr: true,
+    plugins: [
+        '~/plugins/my-directive.client', { src: '~/plugins/axios-mock.client.ts', mode: 'client' }
+    ],
 })

@@ -51,18 +51,7 @@ const {toggleLoginOpen, toggleSwitch} = usePopupController()
   justify-content: center;
   align-items: center;
   overflow: auto;
-}
-
-
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  z-index: 10;
 }
 
 .log-container {
