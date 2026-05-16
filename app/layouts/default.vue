@@ -37,6 +37,7 @@ const {closePopup} = usePopupController()
     background: linear-gradient(180deg,rgba(49, 27, 146, 0.6) 0%, rgba(48, 11, 214, 0.2) 100%);
     backdrop-filter: blur(7px);
     border-radius: 0 0 50px 50px;
+    z-index: 20;
   }
 
 </style>

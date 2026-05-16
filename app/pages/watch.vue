@@ -1,12 +1,16 @@
 <script setup lang="ts">
 
+await navigateTo('/watch/all')
+
 </script>
 
 <template>
-  <section class="banners">
+  <section data-aos="fade-up" class="banners">
     <SwiperBanners ></SwiperBanners>
   </section>
-  <SwiperNav></SwiperNav>
+  <SwiperNav data-aos="fade-up"></SwiperNav>
+  <NuxtPage>
+  </NuxtPage>
 </template>
 
 <style scoped>

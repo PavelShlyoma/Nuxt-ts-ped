@@ -1,0 +1,236 @@
+[
+  {
+    "id": 1,
+    "specialization": ["2D-artist"],
+    "name": "Robert",
+    "surname": "Palmer",
+    "email": "robert.palmer@gmail.com",
+    "status": "active",
+    "role": "user",
+    "portfolio": {
+      "projects":  [
+        {
+          "id": 1,
+          "title": "Dark alley",
+          "description": "Dark alley with description",
+          "images": [
+            "/images/users/RobertPalmer/dark-alley.png"
+          ],
+          "published": true,
+          "author": "Robert Palmer",
+          "tags": [
+            "2d",
+            "robert",
+            "robert palmer",
+            "palmer"
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Night city",
+          "description": "Night city with description",
+          "images": [
+            "/images/users/RobertPalmer/night-city.png"
+          ],
+          "published": true,
+          "author": "Robert Palmer",
+          "tags": [
+            "2d",
+            "robert",
+            "robert palmer",
+            "palmer"
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Pixel forest",
+          "description": "Pixel forest with description",
+          "images": [
+            "/images/users/RobertPalmer/pixel-forest.png"
+          ],
+          "published": true,
+          "author": "Robert Palmer",
+          "tags": [
+            "2d",
+            "robert",
+            "robert palmer",
+            "palmer"
+          ]
+        },
+        {
+          "id": 4,
+          "title": "Sand city",
+          "description": "Sand city with description",
+          "images": [
+            "/images/users/RobertPalmer/sand-city.png"
+          ],
+          "published": true,
+          "author": "Robert Palmer",
+          "tags": [
+            "2d",
+            "robert",
+            "robert palmer",
+            "palmer"
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Stone cave",
+          "description": "Stone cave with description",
+          "images": [
+            "/images/users/RobertPalmer/stone-cave.png"
+          ],
+          "published": true,
+          "author": "Robert Palmer",
+          "tags": [
+            "2d",
+            "robert",
+            "robert palmer",
+            "palmer"
+          ]
+        },
+        {
+          "id": 6,
+          "title": "Swamp with crocodile",
+          "description": "Swamp with crocodile with description",
+          "images": [
+            "/images/users/RobertPalmer/swamp-with-crocodile.png"
+          ],
+          "published": true,
+          "author": "Robert Palmer",
+          "tags": [
+            "2d",
+            "robert",
+            "robert palmer",
+            "palmer"
+          ]
+        },
+        {
+          "id": 7,
+          "title": "Valley",
+          "description": "Valley with description",
+          "images": [
+            "/images/users/RobertPalmer/valley.png"
+          ],
+          "published": true,
+          "author": "Robert Palmer",
+          "tags": [
+            "2d",
+            "robert",
+            "robert palmer",
+            "palmer"
+          ]
+        },
+        {
+          "id": 8,
+          "title": "Workplace",
+          "description": "Workplace with description",
+          "images": [
+            "/images/users/RobertPalmer/workplace.png"
+          ],
+          "published": true,
+          "author": "Robert Palmer",
+          "tags": [
+            "2d",
+            "robert",
+            "robert palmer",
+            "palmer"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "specialization": ["2D-artist", "AI-gen"],
+    "name": "Daisy",
+    "surname": "Morris",
+    "email": "daisy.morris@gmail.com",
+    "status": "active",
+    "role": "user",
+    "portfolio": {
+      "projects":  [
+        {
+          "id": 9,
+          "title": "Background",
+          "description": "Background with description",
+          "images": [
+            "/images/users/DaisyMorris/2D-background.png"
+          ],
+          "published": true,
+          "author": "Daisy Morris",
+          "tags": [
+            "2d",
+            "daisy",
+            "daisy morris",
+            "morris"
+          ]
+        },
+        {
+          "id": 10,
+          "title": "Generated drop",
+          "description": "Generated drop with description",
+          "images": [
+            "/images/users/DaisyMorris/gen-drop.png"
+          ],
+          "published": true,
+          "author": "Daisy Morris",
+          "tags": [
+            "gen",
+            "daisy",
+            "daisy morris",
+            "morris"
+          ]
+        },
+        {
+          "id": 11,
+          "title": "Pixel deer",
+          "description": "Pixel deer with description",
+          "images": [
+            "/images/users/DaisyMorris/pixel-deer.png"
+          ],
+          "published": true,
+          "author": "Daisy Morris",
+          "tags": [
+            "2d",
+            "daisy",
+            "daisy morris",
+            "morris"
+          ]
+        },
+        {
+          "id": 12,
+          "title": "Surrounded by palm trees",
+          "description": "Surrounded by palm trees with description",
+          "images": [
+            "/images/users/DaisyMorris/surrounded-by-palm-trees.png"
+          ],
+          "published": true,
+          "author": "Daisy Morris",
+          "tags": [
+            "gen",
+            "daisy",
+            "daisy morris",
+            "morris"
+          ]
+        },
+        {
+          "id": 13,
+          "title": "Generated lines",
+          "description": "Generated lines with description",
+          "images": [
+            "/images/users/DaisyMorris/gen-lines.png"
+          ],
+          "published": true,
+          "author": "Daisy Morris",
+          "tags": [
+            "gen",
+            "daisy",
+            "daisy morris",
+            "morris"
+          ]
+        }
+      ]
+    }
+  }
+]

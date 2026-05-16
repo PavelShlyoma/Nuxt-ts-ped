@@ -149,17 +149,6 @@ const {isOpenLogin, toggleLoginOpen, isOpenReg, toggleRegOpen, isMenuOpen, toggl
   animation: slideIn 0.5s;
 }
 
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-300%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 .nav--separator {
   width: 4px;
   height: 4px;

@@ -25,6 +25,14 @@ const swiper = useSwiper(navigate, {
   }
 })
 
+const route = useRoute()
+
+let currentRoute = useState<string | undefined>(() => "")
+
+watch(() => route.path, (newPath) => {
+  currentRoute.value = newPath.split('/').pop();
+}, {immediate: true})
+
 </script>
 
 <template>
@@ -32,47 +40,47 @@ const swiper = useSwiper(navigate, {
     <ClientOnly>
       <swiper-container ref="navigate" :init="true">
         <swiper-slide>
-          <NuxtLink class="nav-link active" to="/">
+          <NuxtLink :class="{ active: currentRoute === 'all' }" class="nav-link" to="/watch/all">
             All channels
           </NuxtLink>
         </swiper-slide>
         <swiper-slide>
-          <NuxtLink class="nav-link" to="/">
+          <NuxtLink :class="{ active: currentRoute === '3D' }" class="nav-link" to="/watch/3D">
             3D
           </NuxtLink>
         </swiper-slide>
         <swiper-slide>
-          <NuxtLink class="nav-link" to="/">
+          <NuxtLink :class="{ active: currentRoute === '2D' }" class="nav-link" to="/watch/2D">
             2D
           </NuxtLink>
         </swiper-slide>
         <swiper-slide>
-          <NuxtLink class="nav-link" to="/">
-            Character
+          <NuxtLink :class="{ active: currentRoute === 'characters' }" class="nav-link" to="/watch/characters">
+            Characters
           </NuxtLink>
         </swiper-slide>
         <swiper-slide>
-          <NuxtLink class="nav-link" to="/">
+          <NuxtLink :class="{ active: currentRoute === 'models' }" class="nav-link" to="/watch/models">
             Models
           </NuxtLink>
         </swiper-slide>
         <swiper-slide>
-          <NuxtLink class="nav-link" to="/">
+          <NuxtLink :class="{ active: currentRoute === 'fan-art' }" class="nav-link" to="/watch/fan-art">
             Fan art
           </NuxtLink>
         </swiper-slide>
         <swiper-slide>
-          <NuxtLink class="nav-link" to="/">
-            Environmental
+          <NuxtLink :class="{ active: currentRoute === 'environment' }" class="nav-link" to="/watch/environment">
+            Environment
           </NuxtLink>
         </swiper-slide>
         <swiper-slide>
-          <NuxtLink class="nav-link" to="/">
+          <NuxtLink :class="{ active: currentRoute === 'anatomy' }" class="nav-link" to="/watch/anatomy">
             Anatomy
           </NuxtLink>
         </swiper-slide>
         <swiper-slide>
-          <NuxtLink class="nav-link" to="/">
+          <NuxtLink :class="{ active: currentRoute === 'fantasy' }" class="nav-link" to="/watch/fantasy">
             Fantasy
           </NuxtLink>
         </swiper-slide>
@@ -122,7 +130,7 @@ swiper-slide {
 
 .nav-link:hover  {
   color: white;
-  background-color: RGBA( 0,  0,  0, 0.98);
+  background: RGBA( 0,  0,  0, 0.98);
 }
 
 .nav-link.active {
