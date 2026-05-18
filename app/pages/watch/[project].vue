@@ -4,17 +4,22 @@ const route = useRoute()
 
 let currentRoute = useState<string | undefined>(() => "")
 
-watch(() => route.path, (newPath) => {
-  currentRoute.value = newPath.split('/').pop();
-}, {immediate: true})
-
-  const { data: projects, pending } = await useAsyncData(`content-${currentRoute.value}`, async () => {
+  const { data: projects, pending, refresh } = await useAsyncData(`content-${currentRoute.value}`, async () => {
     const { $axiosInstance } = useNuxtApp()
     const responce = await $axiosInstance.get(`/content/${currentRoute.value}`)
     return responce.data.flatMap(user => user.portfolio.projects)
   }, {
-    watch: [currentRoute]
+    watch: [currentRoute],
+    deep: true,
   })
+
+onMounted(() => {
+  currentRoute.value = route.path.split('/').pop();
+  if (!projects.value && !pending.value && currentRoute.value) {
+    refresh()
+  }
+})
+
 </script>
 
 <template>
@@ -26,7 +31,7 @@ watch(() => route.path, (newPath) => {
         v-for='project in projects'
         :key='project.id'
    >
-     <NuxtLink class="content__link" :to="'/project/' + project.id">
+     <NuxtLink class="content__link" :to="'/project/' + project.id" external>
        <img class="content__image" :src="project.images[0]" alt="1">
      </NuxtLink>
      <h2 class="content__title">{{ project.title }}</h2>
@@ -40,7 +45,7 @@ watch(() => route.path, (newPath) => {
  .content {
    position: relative;
    display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
    gap: 10px;
    grid-auto-rows: 1fr;
    width: 95%;
@@ -56,13 +61,15 @@ watch(() => route.path, (newPath) => {
 
  .content__link {
    width: 100%;
-   height: 100%;
+   aspect-ratio: 1;
  }
 
  .content__image {
    width: 100%;
    height: 100%;
    border-radius: 20px;
+   object-fit: cover;
+   object-position: center;
    border-collapse: collapse;
  }
 
@@ -102,6 +109,20 @@ watch(() => route.path, (newPath) => {
  .content-block:hover .content__author {
    animation: slideIn 0.5s;
    opacity: 1;
+ }
+
+ @media (max-width: 768px) {
+
+   .content__title {
+     opacity: 1;
+     font-size: 18px;
+   }
+
+   .content__author {
+     opacity: 1;
+     font-size: 18px;
+   }
+
  }
 
 </style>

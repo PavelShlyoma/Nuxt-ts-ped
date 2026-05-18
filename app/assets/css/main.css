@@ -16,6 +16,19 @@ body {
     overflow: hidden;
 }
 
+.el-scroll {
+    padding: 10px 0;
+    top: 0;
+    position: sticky;
+    width: 100%;
+    transition: all 0.4s ease;
+    background: RGBA(49, 27, 146, 0.4);
+    background: linear-gradient(180deg,rgba(49, 27, 146, 0.6) 0%, rgba(48, 11, 214, 0.2) 100%);
+    backdrop-filter: blur(7px);
+    border-radius: 0 0 50px 50px;
+    z-index: 20;
+}
+
 button {
     cursor: pointer;
     padding: 0;

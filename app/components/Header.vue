@@ -5,58 +5,62 @@ const {isOpenLogin, toggleLoginOpen, isOpenReg, toggleRegOpen, isMenuOpen, toggl
 </script>
 
 <template>
-  <div  class="nav-header">
-    <NuxtLink to="/" class="nav-main">
-      <img class="nav-main-icon" src="~/../public/icons/header-logo.png" alt="1">
-    </NuxtLink>
-    <div class="nav-container">
-      <NuxtLink to="/watch" class="nav--go">Watch</NuxtLink>
-      <div class="nav--separator"></div>
-      <NuxtLink to="/learning" class="nav--go">Learning</NuxtLink>
-      <div class="nav--separator"></div>
-      <NuxtLink to="/shop" class="nav--go">Shop</NuxtLink>
-      <div class="nav--separator"></div>
-      <NuxtLink to="/job" class="nav--go">Job</NuxtLink>
-      <div class="nav--separator"></div>
-      <NuxtLink to="/hire" class="nav--go">Hire</NuxtLink>
+  <ClientOnlyScroll>
+    <div class="nav-header">
+      <NuxtLink to="/" class="nav-main">
+        <img class="nav-main-icon" src="~/../public/icons/header-logo.png" alt="1">
+      </NuxtLink>
+      <div class="nav-container">
+        <NuxtLink to="/watch" class="nav--go">Watch</NuxtLink>
+        <div class="nav--separator"></div>
+        <NuxtLink to="/learning" class="nav--go">Learning</NuxtLink>
+        <div class="nav--separator"></div>
+        <NuxtLink to="/shop" class="nav--go">Shop</NuxtLink>
+        <div class="nav--separator"></div>
+        <NuxtLink to="/job" class="nav--go">Job</NuxtLink>
+        <div class="nav--separator"></div>
+        <NuxtLink to="/hire" class="nav--go">Hire</NuxtLink>
+      </div>
+      <div class="nav-button-container">
+        <button @click="toggleLoginOpen" class="nav-button--go">
+          Sign in
+        </button>
+        <button @click="toggleRegOpen" class="nav-button--go">
+          Sign up
+        </button>
+        <font-awesome @click="console.log()" class="cog--custom" icon="fa fa-cog"></font-awesome>
+        <button @click="toggleMenu" class="nav-button-gamb-container">
+          <div class="nav-button-gamb">
+          </div>
+        </button>
+      </div>
+      <teleport to="body">
+        <transition name="slide-fade">
+          <AuthLogin v-if="isOpenLogin">
+          </AuthLogin>
+        </transition>
+        <transition name="slide-fade">
+          <AuthRegister v-if="isOpenReg">
+          </AuthRegister>
+        </transition>
+      </teleport>
+      <teleport to="body">
+        <transition name="slide-fade">
+          <MobileMenu class="menu-pos" v-if="isMenuOpen">
+          </MobileMenu>
+        </transition>
+      </teleport>
     </div>
-    <div class="nav-button-container">
-      <button @click="toggleLoginOpen" class="nav-button--go">
-        Sign in
-      </button>
-      <button @click="toggleRegOpen" class="nav-button--go">
-        Sign up
-      </button>
-      <font-awesome @click="console.log()" class="cog--custom" icon="fa fa-cog"></font-awesome>
-      <button @click="toggleMenu" class="nav-button-gamb-container">
-        <div class="nav-button-gamb">
-        </div>
-      </button>
-    </div>
-    <teleport to="body">
-      <transition name="slide-fade">
-        <AuthLogin v-if="isOpenLogin">
-        </AuthLogin>
-      </transition>
-      <transition name="slide-fade">
-        <AuthRegister v-if="isOpenReg">
-        </AuthRegister>
-      </transition>
-    </teleport>
-    <teleport to="body">
-      <transition name="slide-fade">
-        <MobileMenu class="menu-pos" v-if="isMenuOpen">
-        </MobileMenu>
-      </transition>
-    </teleport>
-  </div>
+  </ClientOnlyScroll>
 </template>
 
 <style scoped>
 
 .nav-header {
-  display: flex;
+  padding: 10px 0 0;
+  transition: all 0.4s ease;
   align-items: center;
+  display: flex;
   margin: 0 auto;
   width: 80%;
   justify-content: space-between;
@@ -235,6 +239,7 @@ const {isOpenLogin, toggleLoginOpen, isOpenReg, toggleRegOpen, isMenuOpen, toggl
 
 .menu-pos {
   overflow: hidden;
+  z-index: 10;
 }
 
 @media (max-width: 768px) {
@@ -250,6 +255,12 @@ const {isOpenLogin, toggleLoginOpen, isOpenReg, toggleRegOpen, isMenuOpen, toggl
     display: flex;
     align-items: center;
   }
+
+  .nav-button--go {
+    font-size: 12px;
+  }
+
+
 }
 
 </style>

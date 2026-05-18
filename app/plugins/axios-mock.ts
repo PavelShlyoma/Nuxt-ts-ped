@@ -1,10 +1,10 @@
-// plugins/axios-mock.client.ts
+// plugins/axios-mock.ts
 import MockAdapter from 'axios-mock-adapter'
 import axios, {type AxiosInstance} from "axios";
 import users from '~/assets/users/users.json'
-import type {User} from "~/types/baseUser";
+import type baseProject from '~/types/baseUser.ts'
 
-export default defineNuxtPlugin((nuxtApp):{ provide: { axiosInstance: AxiosInstance } } => {
+export default defineNuxtPlugin(():{ provide: { axiosInstance: AxiosInstance } } => {
     const config = useRuntimeConfig()
 
     const axiosPlugin: AxiosInstance = axios.create({
@@ -12,8 +12,6 @@ export default defineNuxtPlugin((nuxtApp):{ provide: { axiosInstance: AxiosInsta
         baseURL: config.public.BASE_URL,
     })
 
-
-    if (process.client && config.public.NUXT_PUBLIC_USE_MOCKS === true) {
 
         const mock = new MockAdapter(axiosPlugin, { delayResponse: 500 })
 
@@ -50,7 +48,7 @@ export default defineNuxtPlugin((nuxtApp):{ provide: { axiosInstance: AxiosInsta
             return [200, usersFilter]
         })
 
-        mock.onGet(/\/project\/[^\/]+/).reply((config: axios.AxiosRequestConfig<any>): [number, {}] => {
+        mock.onGet(/\/project\/[^\/]+/).reply((config: axios.AxiosRequestConfig<any>): [number, baseProject] => {
             const id: number | undefined = +config.url?.split('/').pop()
 
             const usersFilter = users.map(user => {
@@ -97,7 +95,6 @@ export default defineNuxtPlugin((nuxtApp):{ provide: { axiosInstance: AxiosInsta
         mock.onAny().passThrough()
 
         console.log('✅ Axios mock adapter initialized on client')
-    }
 
     return {
         provide: {

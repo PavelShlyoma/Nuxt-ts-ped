@@ -15,7 +15,4 @@ export default defineNuxtConfig({
       }
     },
     ssr: true,
-    plugins: [
-        '~/plugins/my-directive.client', { src: '~/plugins/axios-mock.client.ts', mode: 'client' }
-    ],
 })

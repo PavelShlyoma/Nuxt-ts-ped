@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
-await navigateTo('/watch/all')
+onMounted(async () => {
+  await navigateTo('/watch/all');
+})
 
 </script>
 

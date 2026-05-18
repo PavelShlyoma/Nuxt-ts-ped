@@ -3,7 +3,7 @@
 const route = useRoute()
 
 let currentRoute = useState<string | undefined>(() => "")
-let openTab = useState<boolean>(() => false)
+let openTab = useState<boolean>(() => true)
 
 function toggleTab() {
   openTab.value = !openTab.value
@@ -13,10 +13,17 @@ watch(() => route.path, (newPath) => {
   currentRoute.value = newPath.split('/').pop();
 }, {immediate: true})
 
-const { data, pending } = await useAsyncData(`project-${currentRoute.value}`, async () => {
+const { data: project, pending, error } = await useAsyncData(`project-${currentRoute.value}`, async () => {
   const { $axiosInstance } = useNuxtApp()
-  const res = await $axiosInstance.get(`/project/${currentRoute.value}`)
-  return res.data
+  if ($axiosInstance) {
+    const res = await $axiosInstance.get(`/project/${currentRoute.value}`)
+    return res.data
+  } else {
+    return {}
+  }
+
+}, {
+  watch: [currentRoute],
 })
 
 </script>
@@ -24,9 +31,12 @@ const { data, pending } = await useAsyncData(`project-${currentRoute.value}`, as
 <template>
   <div v-if="pending" class="content__loading project__loading">
   </div>
+  <div v-else-if="error" class="content__error">
+    error:  {{ error.message }}
+  </div>
   <section
       class="project"
-      v-else
+      v-else-if="project"
   >
     <div
         :class="{ openTab: openTab }"
@@ -40,12 +50,12 @@ const { data, pending } = await useAsyncData(`project-${currentRoute.value}`, as
       <h1
           class="user__title"
       >
-        {{ data.name }} {{ data.surname }}
+        {{ project.name }} {{ project.surname }}
       </h1>
       <div class="user__specialization">
         <NuxtLink
             class="user__specialization__tag"
-            v-for="tag in data.specialization"
+            v-for="tag in project.specialization"
             :key="tag"
             :to="'/project/' + tag"
         >
@@ -54,15 +64,15 @@ const { data, pending } = await useAsyncData(`project-${currentRoute.value}`, as
       </div>
       <hr class="user__hr">
       <h3 class="project__title">
-        Project name: {{ data.portfolio.projects[0].title }}
+        Project name: {{ project.portfolio.projects[0].title }}
       </h3>
       <p class="project__description">
-        Description: {{ data.portfolio.projects[0].description }}
+        Description: {{ project.portfolio.projects[0].description }}
       </p>
       <div class="project__tags">
         <div
             class="project__tag"
-            v-for="tag in data.portfolio.projects[0].tags"
+            v-for="tag in project.portfolio.projects[0].tags"
             :key="tag"
         >
           {{ tag }}
@@ -73,7 +83,7 @@ const { data, pending } = await useAsyncData(`project-${currentRoute.value}`, as
         :class="{ project__openTab: openTab }"
         class="project__content"
     >
-      <div v-for="image in data.portfolio.projects[0].images" :key="image">
+      <div class="project__content__container" v-for="image in project.portfolio.projects[0].images" :key="image">
         <img class="project__content__image" :src="image" alt="1">
       </div>
     </div>
@@ -86,6 +96,14 @@ const { data, pending } = await useAsyncData(`project-${currentRoute.value}`, as
   width: 95%;
   margin: 40px auto;
   position: relative;
+}
+
+.content__error {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 16px;
+  text-align: center;
 }
 
 .chevron {
@@ -210,10 +228,20 @@ const { data, pending } = await useAsyncData(`project-${currentRoute.value}`, as
 .project__content {
   width: calc(78% - 20px);
   transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .project__openTab {
   width: calc(100% - 20px);
+}
+
+.project__content__container {
+  width: 100%;
+  height: 100%;
 }
 
 .project__content__image {
@@ -242,6 +270,27 @@ const { data, pending } = await useAsyncData(`project-${currentRoute.value}`, as
   width: 80px;
   color: black;
   opacity: 0.87;
+}
+
+@media (max-width: 768px) {
+
+  .user__container {
+    display: block;
+    width: 100%;
+  }
+
+  .openTab {
+    right: calc(-100% + 20px);
+  }
+
+  .project__content {
+    width: 100%;
+  }
+
+  .project__openTab {
+    width: calc(100% - 20px);
+  }
+
 }
 
 </style>

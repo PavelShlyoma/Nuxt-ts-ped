@@ -156,6 +156,10 @@ swiper-slide {
     margin: 15px auto;
   }
 
+  .nav-link {
+    font-size: 12px;
+  }
+
 }
 
 </style>

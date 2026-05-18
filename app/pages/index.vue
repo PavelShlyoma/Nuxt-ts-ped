@@ -1,3 +1,7 @@
 <script setup lang="ts">
-await navigateTo('/watch')
+
+onMounted(async () => {
+  await navigateTo('/watch', {external: true});
+})
+
 </script>
